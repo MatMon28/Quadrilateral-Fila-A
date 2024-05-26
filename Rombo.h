@@ -4,7 +4,6 @@
 	Details.
 */
 
-
 #ifndef RHOMBUS_H
 #define RHOMBUS_H
 
@@ -52,7 +51,6 @@ public:
 	void Init(const Rhombus& r);
 	void Reset();
 	/// @}
-
 
 	/// @name GETTERS / SETTERS
 	/// @{

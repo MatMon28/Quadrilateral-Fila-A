@@ -21,7 +21,7 @@ protected:
 	float sides[4];
 
 	TextArea* tarea;
-
+	TextArea DefArea; //area di testo di default
 	void SetSides(float s1, float s2, float s3, float s4);
 
 	/// @name PURE VIRTUAL FUNCTIONS

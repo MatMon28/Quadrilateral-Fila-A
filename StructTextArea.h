@@ -5,7 +5,6 @@
 	Details.
 */
 
-
 # define SLEN 50
 
 /// @struct TextArea

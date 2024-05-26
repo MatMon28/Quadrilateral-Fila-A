@@ -3,14 +3,14 @@
 ///
 ///	Details.
 ///
-
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream> 
 #include<cmath>
 #include "Rombo.h"
 
 /// @brief default constructor 
 Rhombus::Rhombus() {
-
+	const char* DefaultChar = "Inserisci testo";
 	cout << "Rhombus - constructor - default" << endl;
 
 	Init();
@@ -21,7 +21,7 @@ Rhombus::Rhombus() {
 /// @param dL diagonal (longer)
 /// @param dS diagonal (shorter)
 Rhombus::Rhombus(float dL, float dS) {
-
+	
 	Init();
 
 	cout << "Rhombus - constructor" << endl;
@@ -32,7 +32,6 @@ Rhombus::Rhombus(float dL, float dS) {
 	}
 	else
 		SetDim(dL, dS);
-
 }
 
 /// @brief constructor 
@@ -41,7 +40,17 @@ Rhombus::Rhombus(float dL, float dS) {
 /// @param ta struct of type TextArea
 Rhombus::Rhombus(float dL, float dS, TextArea ta) {
 
+	 
+	cout << "Rhombus - constructor - TextArea" << endl;
 
+	if (dL <= 0. || dS <= 0.) {
+		WarningMessage("constructor: diagonals should be > 0");
+		SetDim(0, 0);
+	}
+	else
+		SetDim(dL, dS);
+
+	tarea = &ta;
 
 }
 
@@ -81,7 +90,7 @@ Rhombus& Rhombus::operator=(const Rhombus& r) {
 /// @return true if the two objects have the same width and the same length  
 bool Rhombus::operator==(const Rhombus& r) {
 
-	if (r.diagL == diagL && r.diagS == diagS)
+	if (r.diagL == diagL && r.diagS == diagS && tarea->size == r.tarea->size && strcmp(tarea->string, r.tarea->string) == 0)
 		return true;
 
 	return false;
@@ -89,10 +98,14 @@ bool Rhombus::operator==(const Rhombus& r) {
 
 /// @brief default initialization of the object
 void Rhombus::Init() {
+	
+	const char* DefaultText = "Inserisci testo";
 	SetDim(0, 0);
-
+	
+	tarea = &DefArea;
+	tarea->size = 11;
+	strcpy(tarea->string, DefaultText);
 }
-
 
 /// @brief initialization of the object as a copy of an object 
 /// @param r reference to the object that should be copied 
@@ -100,16 +113,18 @@ void Rhombus::Init(const Rhombus& r) {
 
 	Init();
 	SetDim(r.diagL, r.diagS);
+	tarea->size = r.tarea->size;
+	strcpy(tarea->string, r.tarea->string);
 
 }
 
 /// @brief total reset of the object  
 void Rhombus::Reset() {
-
+	
 	SetDim(0, 0);
-
+	tarea->size = 11;
+	strcpy(tarea->string, "Inserisci testo");
 }
-
 
 /// @brief set longer diagonal of the object
 /// @param d diagonal 
@@ -198,7 +213,6 @@ float Rhombus::Area() {
 	return (diagL * diagS / 2.);
 }
 
-
 /// @brief write an error message 
 /// @param string message to be printed
 void Rhombus::ErrorMessage(const char* string) {
@@ -217,7 +231,6 @@ void Rhombus::WarningMessage(const char* string) {
 
 }
 
-
 /// @brief for debugging: all about the object
 void Rhombus::Dump() {
 	cout << endl;
@@ -234,11 +247,14 @@ void Rhombus::Dump() {
 
 }
 
-
 /// @brief to draw a rhombus
 void Rhombus::Drawing() {
 
-
+	cout << endl << "++++++ Questo è il disegno di un rombo ++++++" << endl;
+	cout << endl << " La prima diagonale è = " << diagL;
+	cout << endl << " La seconda diagonale è = " << diagS << endl;
+	cout << endl << " Al suo interno c'è scritto: '" << tarea->string << "'";
+	cout << endl << " con un font di dimensione:" << tarea->size << endl;
 }
 
 

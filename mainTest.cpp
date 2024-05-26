@@ -1,3 +1,4 @@
+/*
 #include<iostream>
 #include <cstring>
 
@@ -7,20 +8,18 @@
 
 const int LISTL = 6;
 
-Quadrilateral* quadList[LISTL];
+Quadrilateral* Lista[LISTL];
 
 void Show() {
 
 	int i;
 
 	for (i = 0; i < LISTL; i++)
-		quadList[i]->Drawing();
+		Lista[i]->Drawing();
 
 }
 
-
 int main() {
-
 
 	TextArea a1, a2;
 	char t1[SLEN] = "testo 1";
@@ -40,24 +39,32 @@ int main() {
 	Rhombus rhoB = rhoA;
 	Rhombus rhoC(4, 3);
 
-	quadList[0] = &rectA;
-	quadList[1] = &rectB;
-	quadList[2] = &rectC;
-	quadList[3] = &rhoA;
-	quadList[4] = &rhoB;
-	quadList[5] = &rhoC;
+	Lista[0] = &rectA;
+	Lista[1] = &rectB ;
+	Lista[2] = &rectC;
+	Lista[3] = &rhoA;
+	Lista[4] = &rhoB;
+	Lista[5] = &rhoC;
 
 	Show();
 
 	rectA.SetFontSize(20);
 	rectC = rectA;
+	rhoC = rhoA;
 	rectB.SetTextArea(a2);
 	rhoB.SetText(t3);
 
-
+	if (rectC == rectA)
+		cout << "i due rettangoli sono UGUALI" << endl;
+	else 
+		cout << "i due rettangoli sono DIVERSI" << endl;
+	if (rhoC == rhoA)
+		cout << "i due rombi sono UGUALI" << endl;
+	else
+		cout << "i due rombi sono DIVERSI" << endl;
 	Show();
-
 
 	return 0;
 
 }
+*/

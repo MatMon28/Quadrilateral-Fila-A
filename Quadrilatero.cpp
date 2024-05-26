@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
 #include "Quadrilatero.h"
 
@@ -11,13 +12,14 @@ Quadrilateral::Quadrilateral() {
 }
 
 /// @brief constructor 
-/// ta a struct of type TextArea with infos on text and font size
+/// @param ta a struct of type TextArea with infos on text and font size
 Quadrilateral::Quadrilateral(TextArea ta) {
 
 	cout << "Quadrilateral - constructor - TextArea" << endl;
-	*tarea = ta;
-	
 	Init();
+	tarea = &ta;
+	
+	
 }
 
 /// @brief copy constructor 
@@ -75,10 +77,12 @@ bool Quadrilateral::operator==(const Quadrilateral& o) {
 /// @brief default initialization of the object
 void Quadrilateral::Init() {
 
-
-
+	const char* DefaultText = "Inserisci testo";
 	SetSides(0., 0., 0., 0.);
-
+	
+	tarea = &DefArea;
+	tarea->size = 11;
+	strcpy(tarea->string, DefaultText);
 
 }
 
@@ -98,10 +102,10 @@ void Quadrilateral::Init(const Quadrilateral& o) {
 /// @brief total reset of the object  
 void Quadrilateral::Reset() {
 
-	if (tarea != NULL) {
+	/*if (tarea != NULL) {
 		delete tarea;
 		tarea = NULL;
-	}
+	} */
 	sides[0] = sides[1] = sides[2] = sides[3] = 0.;
 
 }
@@ -141,7 +145,7 @@ void Quadrilateral::GetSides(float& s0, float& s1, float& s2, float& s3) {
 void Quadrilateral::GetTextArea(TextArea& ta) {
 
 	ta.size = tarea->size;
-	*ta.string = *tarea->string;
+	strcpy(ta.string, tarea->string);
 
 	return;
 }
@@ -150,6 +154,7 @@ void Quadrilateral::GetTextArea(TextArea& ta) {
 /// @param text the string used in the text area 
 void Quadrilateral::GetText(char* text) {
 
+	strcpy(text, tarea->string);
 
 	return;
 }
@@ -157,7 +162,7 @@ void Quadrilateral::GetText(char* text) {
 /// @brief get the font size of the text area 
 /// @return the font size
 unsigned int Quadrilateral::GetFontSize() {
-
+	
 	return tarea->size;
 }
 
@@ -167,7 +172,9 @@ unsigned int Quadrilateral::GetFontSize() {
 void Quadrilateral::SetTextArea(TextArea ta) {
 
 	tarea->size = ta.size;
-	*tarea->string = *ta.string;
+	strcpy(tarea->string, ta.string);
+	// cout << "imposto font size a : " << tarea->size << endl;
+	// cout << "imposto font size a : " << tarea->string << endl;
 	return;
 }
 
@@ -175,7 +182,7 @@ void Quadrilateral::SetTextArea(TextArea ta) {
 /// @param text the text 
 void Quadrilateral::SetText(char* text) {
 
-	*tarea->string = *text;
+	strcpy(tarea->string, text);
 	return;
 }
 
@@ -184,6 +191,7 @@ void Quadrilateral::SetText(char* text) {
 void Quadrilateral::SetFontSize(unsigned int size) {
 
 	tarea->size = size;
+	// cout << "imposto font size a : " << tarea->size << endl;
 	return;
 }
 
@@ -192,7 +200,7 @@ void Quadrilateral::SetFontSize(unsigned int size) {
 /// @param string message to be printed
 void Quadrilateral::ErrorMessage(const char* string) {
 
-	cout << endl << "ERROR -- Quadrilateral --";
+	// cout << endl << "ERROR -- Quadrilateral --";
 	cout << string << endl;
 
 }

@@ -3,7 +3,7 @@
 ///
 ///	Details.
 ///
-
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include <cstring>
 #include "Rettangolo.h"
@@ -22,6 +22,7 @@ Rectangle::Rectangle() {
 /// @param h height of the rectangle
 Rectangle::Rectangle(float w, float h) {
 
+	
 	Init();
 
 	cout << "Rectangle - constructor" << endl;
@@ -32,15 +33,27 @@ Rectangle::Rectangle(float w, float h) {
 	}
 	else
 		SetDim(w, h);
-
+	
 }
 
 /// @brief constructor 
 /// @param w width of the rectangle
 /// @param h height of the rectangle 
-/// @param sf struct of type Format
+/// @param ta struct of type TextArea
 Rectangle::Rectangle(float w, float h, TextArea ta) {
 
+	Init();
+
+	cout << "Rectangle - constructor - TextArea" << endl;
+
+	if (w <= 0. || h <= 0.) {
+		WarningMessage("constructor: width and height should be > 0");
+		SetDim(0, 0);
+	}
+	else
+		SetDim(w, h);
+
+	tarea = &ta;
 
 }
 
@@ -53,7 +66,7 @@ Rectangle::~Rectangle() {
 }
 
 /// @brief copy constructor 
-/// @param o reference to the object that should be copied 
+/// @param r reference to the object that should be copied 
 Rectangle::Rectangle(const Rectangle& r) {
 
 	cout << "Rectangle - copy constructor" << endl;
@@ -63,7 +76,7 @@ Rectangle::Rectangle(const Rectangle& r) {
 }
 
 /// @brief overload of operator = 
-/// @param o reference to the object on the right side of the operator 
+/// @param r reference to the object on the right side of the operator 
 /// @return reference to the object on the left side of the operator 
 Rectangle& Rectangle::operator=(const Rectangle& r) {
 
@@ -80,7 +93,7 @@ Rectangle& Rectangle::operator=(const Rectangle& r) {
 /// @return true if the two objects have the same width and the same length  
 bool Rectangle::operator==(const Rectangle& r) {
 
-	if (r.width == width && r.height == height)
+	if (r.width == width && r.height == height && tarea->size== r.tarea->size && strcmp(tarea->string, r.tarea->string)==0)
 		return true;
 
 	return false;
@@ -88,8 +101,12 @@ bool Rectangle::operator==(const Rectangle& r) {
 
 /// @brief default initialization of the object
 void Rectangle::Init() {
+	
+	const char* DefaultText = "Inserisci testo";
 	SetDim(0, 0);
-
+	 tarea = &DefArea;
+	 tarea->size = 11;
+	 strcpy(tarea->string, DefaultText);
 }
 
 
@@ -99,14 +116,16 @@ void Rectangle::Init(const Rectangle& r) {
 
 	Init();
 	SetDim(r.width, r.height);
-
+	tarea->size = r.tarea->size;
+	strcpy(tarea->string, r.tarea->string);
 }
 
 /// @brief total reset of the object  
 void Rectangle::Reset() {
 
 	SetDim(0, 0);
-
+	tarea->size = 11;
+	strcpy(tarea->string, "Inserisci testo");
 }
 
 
@@ -196,6 +215,11 @@ void Rectangle::ErrorMessage(const char* string) {
 /// @brief to draw a rectangle
 void Rectangle::Drawing() {
 
+	cout << endl << "++++++ Questo è il disegno di un rettangolo ++++++"<< endl;
+	cout << endl << " Altezza = "<< height;
+	cout << endl << " Larghezza = " << width << endl;
+	cout << endl << " Al suo interno c'è scritto: '"<< tarea->string << "'";
+	cout << endl << " con un font di dimensione:"<< tarea->size << endl;
 }
 
 /// @brief write a warning message 
