@@ -10,7 +10,7 @@
 
 /// @brief default constructor 
 Rhombus::Rhombus() {
-	const char* DefaultChar = "Inserisci testo";
+	
 	cout << "Rhombus - constructor - default" << endl;
 
 	Init();
@@ -90,7 +90,9 @@ Rhombus& Rhombus::operator=(const Rhombus& r) {
 /// @return true if the two objects have the same width and the same length  
 bool Rhombus::operator==(const Rhombus& r) {
 
-	if (r.diagL == diagL && r.diagS == diagS && tarea->size == r.tarea->size && strcmp(tarea->string, r.tarea->string) == 0)
+	if (r.diagL == diagL && r.diagS == diagS &&
+		tarea->size == r.tarea->size &&
+		strcmp(tarea->string, r.tarea->string) == 0)
 		return true;
 
 	return false;

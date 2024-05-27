@@ -93,7 +93,9 @@ Rectangle& Rectangle::operator=(const Rectangle& r) {
 /// @return true if the two objects have the same width and the same length  
 bool Rectangle::operator==(const Rectangle& r) {
 
-	if (r.width == width && r.height == height && tarea->size== r.tarea->size && strcmp(tarea->string, r.tarea->string)==0)
+	if (r.width == width && r.height == height && 
+		tarea->size== r.tarea->size &&
+		strcmp(tarea->string, r.tarea->string) == 0)
 		return true;
 
 	return false;
@@ -124,7 +126,6 @@ void Rectangle::Init(const Rectangle& r) {
 void Rectangle::Reset() {
 
 	SetDim(0, 0);
-	tarea->size = 11;
 	strcpy(tarea->string, "Inserisci testo");
 }
 

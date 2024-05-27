@@ -87,7 +87,7 @@ void Quadrilateral::Init() {
 }
 
 /// @brief initialization of the object as a copy of an object 
-/// @param r reference to the object that should be copied 
+/// @param o reference to the object that should be copied 
 void Quadrilateral::Init(const Quadrilateral& o) {
 	Reset();
 	Init();
@@ -95,17 +95,18 @@ void Quadrilateral::Init(const Quadrilateral& o) {
 	sides[1] = o.sides[1];
 	sides[2] = o.sides[2];
 	sides[3] = o.sides[3];
-
+	tarea->size = o.tarea->size;
+	strcpy(tarea->string, o.tarea->string);
 
 }
 
 /// @brief total reset of the object  
 void Quadrilateral::Reset() {
 
-	/*if (tarea != NULL) {
-		delete tarea;
+	if (tarea != NULL) {
+		//delete tarea;
 		tarea = NULL;
-	} */
+	} 
 	sides[0] = sides[1] = sides[2] = sides[3] = 0.;
 
 }
@@ -200,7 +201,7 @@ void Quadrilateral::SetFontSize(unsigned int size) {
 /// @param string message to be printed
 void Quadrilateral::ErrorMessage(const char* string) {
 
-	// cout << endl << "ERROR -- Quadrilateral --";
+    cout << endl << "ERROR -- Quadrilateral --";
 	cout << string << endl;
 
 }
